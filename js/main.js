@@ -123,6 +123,7 @@ const deleteChildElements = (parentElement) => {
             while (child) {
                 parentElement.removeChild(child);
                 child = parentElement.lastElementChild;
+                // comments to be deleted
             }
             
             return parentElement;
@@ -263,7 +264,7 @@ const populateSelectMenu = (jsonData) => {
     select menu
     g. Return the selectMenu element 
 */
-};  // unsure if completed or not
+};  // completed
 
 /* 
 NOTE: The next functions use Async / Await to request data from an API. We cover this in
