@@ -150,9 +150,7 @@ const addButtonListeners = () => {
     const main = document.querySelector("main");
     const buttons = main.querySelectorAll("button");
     console.log(buttons);
-    if(!buttons) {
-        return;
-    } else {
+    if(buttons) {
         buttons.forEach((button) => {
             console.log('found a button'); // reports as expected
             const postId = button.dataset.postid; 
@@ -162,8 +160,9 @@ const addButtonListeners = () => {
             button.addEventListener("click", function (e) {toggleComments(e, postId)}, false);
         });
         console.log(buttons); // returns a node list of 10 buttons
-        return buttons;
-    }
+        
+    } 
+    return buttons;
    
 /* 
     // a. Selects all buttons nested inside the main element
@@ -486,7 +485,7 @@ const toggleComments = (event, postId) => {
         console.log("return undefined from toggleComments");
         return undefined;
     } 
-        console.log(`toggleComments postId: '${postId}`); // returns undefined
+        console.log(`toggleComments postId: ${postId}`); // returns undefined!!!   
         console.log("clicked");
         event.target.listener = true;
         const section = toggleCommentSection(postId);
