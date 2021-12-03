@@ -125,7 +125,7 @@ const deleteChildElements = (parentElement) => {
     // d. Use parentElement.removeChild to remove the child in the loop
     // e. Reassign child to parentElement.lastElementChild in the loop
     // f. Return the parentElement */
-};// completed
+}; // completed
 
 // 6
 const addButtonListeners = () => {
@@ -153,7 +153,7 @@ const addButtonListeners = () => {
     will pass for addButtonListeners until toggleComments exists. I recommend
     waiting on the logic inside the toggleComments function until we get there.
 */
-};  // completed
+}; // completed
 
 // 7
 const removeButtonListeners = () => {
@@ -237,7 +237,7 @@ const populateSelectMenu = (jsonData) => {
     select menu
     g. Return the selectMenu element 
 */
-};  // completed
+}; // completed
 
 // 10
 const getUsers = async () => {
@@ -410,7 +410,7 @@ const createPosts = async (postsData) => {
     // s. After the loop completes, append the article element to the fragment
     // t. Return the fragment element
  */
-};  // completed
+}; // completed
 
 // 16
 const displayPosts = async (postsData) => {
@@ -433,11 +433,11 @@ const displayPosts = async (postsData) => {
     // f. Appends the element to the main element
     // g. Returns the element variable
  */
-}; // I think Completed??
+}; // completed
 
 // 17
 const toggleComments = (event, postId) => {
-    if(!event && !postId) { 
+    if(!event || !postId) { 
         return;
     } 
         event.target.listener = true;
