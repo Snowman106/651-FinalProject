@@ -122,7 +122,7 @@ const deleteChildElements = (parentElement) => {
             let child = parentElement.lastElementChild;
             while (child) {
                 parentElement.removeChild(child);
-                child = parentElement.lastElementChild;
+                child = parentElement.lastElementChild
                 // comments to be deleted
             }
             
@@ -482,11 +482,11 @@ This means their sole purpose is to call dependencies with the correct data in t
 // 17
 const toggleComments = (event, postId) => {
     console.log("#17 toggleComments started");
-   /*  if(!event && !postId) { 
+    if(!event && !postId) { 
         console.log("return undefined from toggleComments");
         return undefined;
-    }  */
-        console.log(postId); // returns undefined
+    } 
+        console.log(`toggleComments postId: '${postId}`); // returns undefined
         console.log("clicked");
         event.target.listener = true;
         const section = toggleCommentSection(postId);
