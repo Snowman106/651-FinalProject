@@ -114,7 +114,6 @@ const deleteChildElements = (parentElement) => {
                 child = parentElement.lastElementChild
                 // comments to be deleted
             }
-            
             return parentElement;
         }
     }
@@ -170,7 +169,6 @@ const removeButtonListeners = () => {
         false);
     });
     return buttons;
-    
 
 /*     
     a. Selects all buttons nested inside the main element
@@ -368,25 +366,25 @@ const displayComments = async (postId) => {
 const createPosts = async (postsData) => {
     if (!postsData) {
         return;
-    } else {
-        const fragment = document.createDocumentFragment();
-        for (const post of postsData) {   
-            const articleEle = document.createElement("article");
-            const h2Ele = createElemWithText("h2", post.title);
-            const pEleBody = createElemWithText('p', post.body);
-            const pElePostId = createElemWithText('p', `Post ID: ${post.id}`);
-            const author = await getUser(post.userId);
-            const pEleAuthor = createElemWithText('p', `Author: ${author.name} with ${author.company.name}`);
-            const pEleCatchPhrase = createElemWithText('p', author.company.catchPhrase);
-            const button = createElemWithText('button', "Show Comments");
-            button.dataset.postId = post.id;
-            articleEle.append(h2Ele, pEleBody, pElePostId, pEleAuthor, pEleCatchPhrase, button);
-            const section = await displayComments(post.id);
-            articleEle.append(section);
-            fragment.append(articleEle);
-        };
+    } 
+    const fragment = document.createDocumentFragment();
+    for (const post of postsData) {   
+        const articleEle = document.createElement("article");
+        const h2Ele = createElemWithText("h2", post.title);
+        const pEleBody = createElemWithText('p', post.body);
+        const pElePostId = createElemWithText('p', `Post ID: ${post.id}`);
+        const author = await getUser(post.userId);
+        const pEleAuthor = createElemWithText('p', `Author: ${author.name} with ${author.company.name}`);
+        const pEleCatchPhrase = createElemWithText('p', author.company.catchPhrase);
+        const button = createElemWithText('button', "Show Comments");
+        button.dataset.postId = post.id;
+        articleEle.append(h2Ele, pEleBody, pElePostId, pEleAuthor, pEleCatchPhrase, button);
+        const section = await displayComments(post.id);
+        articleEle.append(section);
+        fragment.append(articleEle);
+    };
     return fragment;
-    }; 
+     
 /*     
     // a. Dependencies: createElemWithText, getUser, displayComments
     // b. Is an async function
