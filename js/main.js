@@ -9,7 +9,9 @@ Final Project
 const createElemWithText = (htmlElement = "p", textContent = "", className) => {
     const newElement = document.createElement(htmlElement);
     newElement.textContent = textContent;
-    if (className) newElement.classList.add(className);
+    if (className) { 
+        newElement.classList.add(className)
+    };
     return newElement;
 /*  
     // a. Receives up to 3 parameters
@@ -30,7 +32,7 @@ const createSelectOptions = (data) => {
     if (data){
         data.forEach((user) => {
             const opt = document.createElement('option');
-            opt.value =user.id;
+            opt.value = user.id;
             opt.textContent = user.name;
             arrOptionsElements.push(opt);
         });
@@ -53,25 +55,17 @@ const createSelectOptions = (data) => {
 
 // 3
 const toggleCommentSection = (postId) => {
-    console.log("toggleCommentSection started");
-    
     if (!postId) {
-        console.log("Return undefined from toggleCommentSection");
         return undefined;
-    } else {
-        const section = document.querySelector(`section[data-post-id="${postId}"]`);
-        if (!section?.tagName) {
-            return null;
-        }
-
-        if (parseInt(section.dataset.postId) === postId)  {
-            section.classList.toggle("hide");
-            console.log("returning section from toggleCommentSection");
-            return section;
-        } else {
-            return null;   
-        }
     }
+    const section = document.querySelector(`section[data-post-id='${postId}']`);
+    if (!section?.tagName) {
+        return null;
+    } else {
+        section.classList.toggle("hide");
+        return section;
+    }
+    
 /*     
     // a. Receives a postId as the parameter
     // b. Selects the section element with the data-post-id attribute equal to the postId
@@ -87,21 +81,16 @@ const toggleCommentSection = (postId) => {
 const toggleCommentButton = (postId) => {
     const button = document.querySelector(`button[data-post-id="${postId}"]`);
     if (!postId) { 
-        return undefined;
+        return;
+    } 
+    if (!button?.tagName) {
+        return null;
     } else {
-        if (!button?.tagName) {
-            return null;
-        } else {
-            button.textContent = button.textContent === 'Show Comments' ? 'Hide Comments' : "Show Comments";
+        button.textContent = button.textContent === 'Show Comments' ? 'Hide Comments' : "Show Comments";
 
-            /* if (button.textContent === "Show Comments") {
-                button.textContent = "Hide Comments";
-            } else {
-                button.textContent = "Show Comments";
-            } */
-            return button;
-        }
+        return button;
     }
+    
 /*     
     // a. Receives a postId as the parameter
     // b. Selects the button with the data-post-id attribute equal to the postId received as a parameter
@@ -139,28 +128,15 @@ const deleteChildElements = (parentElement) => {
     // f. Return the parentElement */
 };// completed
 
-/* NOTE: The above functions had no dependency on other functions. They were very
-self-contained which is ideal. That is not always possible though. We will try to limit
-dependencies as we go. The next several functions have small dependencies.
- */
-
 // 6
 const addButtonListeners = () => {
-    console.log("addButtonListeners started");  // started 
     const main = document.querySelector("main");
     const buttons = main.querySelectorAll("button");
-    console.log(buttons);
     if(buttons) {
         buttons.forEach((button) => {
-            console.log('found a button'); // reports as expected
-            const postId = button.dataset.postid; 
-
-            console.log(button.dataset.postid); // only returns undefined !!!
-
+            const postId = button.dataset.postId; 
             button.addEventListener("click", function (e) {toggleComments(e, postId)}, false);
         });
-        console.log(buttons); // returns a node list of 10 buttons
-        
     } 
     return buttons;
    
@@ -178,7 +154,7 @@ const addButtonListeners = () => {
     will pass for addButtonListeners until toggleComments exists. I recommend
     waiting on the logic inside the toggleComments function until we get there.
 */
-};  // not done
+};  // completed
 
 // 7
 const removeButtonListeners = () => {
@@ -186,15 +162,15 @@ const removeButtonListeners = () => {
     const buttons = document.querySelectorAll("main button");
     if (!buttons) {
         return;
-    } else {
-        buttons.forEach((button) => {
-            const postId = button.dataset.postId;
-            button.removeEventListener("click", 
-            function (e) {toggleComments(e, postId)},
-            false);
-        });
-        return buttons;
-    }
+    } 
+    buttons.forEach((button) => {
+        const postId = button.dataset.postId;
+        button.removeEventListener("click", 
+        function (e) {toggleComments(e, postId)},
+        false);
+    });
+    return buttons;
+    
 
 /*     
     a. Selects all buttons nested inside the main element
@@ -210,19 +186,19 @@ const removeButtonListeners = () => {
 // 8
 const createComments = (jsonComments) => {
     if(!jsonComments) { 
-        return undefined;
-    } else {
-        const fragment = document.createDocumentFragment();
-        jsonComments.forEach((comment) => {
-            const articleElement = document.createElement('article');
-            const h3Element = createElemWithText('h3', comment.name);
-            const bodyElement = createElemWithText('p', comment.body);
-            const emailElement = createElemWithText('p', `From: ${comment.email}`);
-            articleElement.append(h3Element, bodyElement, emailElement);
-            fragment.append(articleElement);
-        });
-        return fragment;
-    }
+        return;
+    } 
+    const fragment = document.createDocumentFragment();
+    jsonComments.forEach((comment) => {
+        const articleElement = document.createElement('article');
+        const h3Element = createElemWithText('h3', comment.name);
+        const bodyElement = createElemWithText('p', comment.body);
+        const emailElement = createElemWithText('p', `From: ${comment.email}`);
+        articleElement.append(h3Element, bodyElement, emailElement);
+        fragment.append(articleElement);
+    });
+    return fragment;
+    
 /*     
     // a. Depends on the createElemWithText function we created
     // b. Receives JSON comments data as a parameter
@@ -243,7 +219,7 @@ const createComments = (jsonComments) => {
 // 9
 const populateSelectMenu = (jsonData) => {
     if(!jsonData) {
-        return undefined 
+        return; 
     };
     const selectMenu = document.querySelector('#selectMenu');
     const optionsElements = createSelectOptions(jsonData);
@@ -264,12 +240,6 @@ const populateSelectMenu = (jsonData) => {
     g. Return the selectMenu element 
 */
 };  // completed
-
-/* 
-NOTE: The next functions use Async / Await to request data from an API. We cover this in
-Week 13. I do not recommend proceeding beyond this point until you have completed the
-learning module for Week 13. 
-*/
 
 // 10
 const getUsers = async () => {
@@ -295,12 +265,12 @@ const getUsers = async () => {
 
 // 11
 const getUserPosts = async (userId) => {
-    if(!userId) { return undefined; }
-    try {
+    if(!userId) { 
+        return; 
+    } try {
         const results = await fetch (`https://jsonplaceholder.typicode.com/users/${userId}/posts`);
         if(!results.ok) { throw new Error ("getUserPosts results error")};
         return await results.json();
-
     } catch (err) {
         console.error(err);
     }
@@ -318,12 +288,14 @@ const getUserPosts = async (userId) => {
 
 // 12
 const getUser = async (userId) => {
-    if(!userId) { return undefined; }
-    try {
+    if(!userId) { 
+        return; 
+    } try {
         const results = await fetch (`https://jsonplaceholder.typicode.com/users/${userId}`);
-        if(!results.ok) { throw new Error ("getUser results error")};
+        if(!results.ok) { 
+            throw new Error ("getUser results error")
+        };
         return await results.json();
-
     } catch (err) {
         console.error(err);
     }
@@ -341,12 +313,14 @@ const getUser = async (userId) => {
 
 // 13
 const getPostComments = async (postId) => {
-    if(!postId) { return undefined; }
-    try {
+    if(!postId) { 
+        return; 
+    } try {
         const results = await fetch (`https://jsonplaceholder.typicode.com/posts/${postId}/comments`);
-        if(!results.ok) { throw new Error ("getPostComments results error")};
+        if(!results.ok) { 
+            throw new Error ("getPostComments results error")
+        };
         return await results.json();
-
     } catch (err) {
         console.error(err);
     }
@@ -362,16 +336,10 @@ const getPostComments = async (postId) => {
  */
 }; // completed
 
-/* 
-NOTE: The next functions will depend on the async API data functions we just created.
-Therefore, these functions will also need to be async. When they call the API functions, they will
-need to await data from those functions.
- */
-
 // 14
 const displayComments = async (postId) => {
     if (!postId) { 
-        return undefined 
+        return; 
     };
     const sectionElement = document.createElement("section");
     sectionElement.dataset.postId = postId;
@@ -399,9 +367,8 @@ const displayComments = async (postId) => {
 // 15
 const createPosts = async (postsData) => {
     if (!postsData) {
-        return undefined;
+        return;
     } else {
-
         const fragment = document.createDocumentFragment();
         for (const post of postsData) {   
             const articleEle = document.createElement("article");
@@ -412,7 +379,7 @@ const createPosts = async (postsData) => {
             const pEleAuthor = createElemWithText('p', `Author: ${author.name} with ${author.company.name}`);
             const pEleCatchPhrase = createElemWithText('p', author.company.catchPhrase);
             const button = createElemWithText('button', "Show Comments");
-            button.dataset.PostId = post.id;
+            button.dataset.postId = post.id;
             articleEle.append(h2Ele, pEleBody, pElePostId, pEleAuthor, pEleCatchPhrase, button);
             const section = await displayComments(post.id);
             articleEle.append(section);
@@ -420,8 +387,6 @@ const createPosts = async (postsData) => {
         };
     return fragment;
     }; 
-
-    
 /*     
     // a. Dependencies: createElemWithText, getUser, displayComments
     // b. Is an async function
@@ -472,31 +437,17 @@ const displayPosts = async (postsData) => {
  */
 }; // I think Completed??
 
-/* 
-NOTE: This is the last group of functions. I call them “procedural functions” because they exist
-to pull the other functions together in an order that allows the web app to function as it should.
-This means their sole purpose is to call dependencies with the correct data in the proper order.
- */
-
 // 17
 const toggleComments = (event, postId) => {
-    console.log("#17 toggleComments started");
     if(!event && !postId) { 
-        console.log("return undefined from toggleComments");
-        return undefined;
+        return;
     } 
-        console.log(`toggleComments postId: ${postId}`); // returns undefined!!!   
-        console.log("clicked");
         event.target.listener = true;
         const section = toggleCommentSection(postId);
         const button = toggleCommentButton(postId);
-        console.log(section);
-        console.log(button);
         const arr = [];
         arr.push(section, button);
-        console.log(arr);
         return arr;
-    
 /* 
     // a. Dependencies: toggleCommentSection, toggleCommentButton
     // b. Receives 2 parameters: (see addButtonListeners function description)
@@ -516,7 +467,7 @@ const toggleComments = (event, postId) => {
 // 18
 const refreshPosts = async (jsonData) => {
     if(!jsonData) {
-        return undefined;
+        return;
     }
     const removeButtons = removeButtonListeners();
     const main = deleteChildElements(document.querySelector('main'));
@@ -585,7 +536,7 @@ const initPage = async () => {
     // h. Return an array with users JSON data from getUsers and the select element
     // result from populateSelectMenu: [users, select]
  */
-}; //
+}; // completed
 
 // 21
 const initApp = () => {
@@ -604,21 +555,9 @@ const initApp = () => {
     event fires for the #selectMenu
     f. NOTE: All of the above needs to be correct for you app to function correctly.
  */
-}; //
+}; // completed
 
 // 22
-
 document.addEventListener("DOMContentLoaded", (e) => {
     initApp();
-});
-
-/* 
-However, I can only test if the initApp function exists. It does not return anything.
-NOTE: There is one last step to get your app to function correctly. I cannot test for this, but you
-must apply it to call the script into action.
-*** This must be underneath the definition of initApp in your file.
-1. Add an event listener to the document.
-2. Listen for the “DOMContentLoaded” event.
-3. Put initApp in the listener as the event handler function.
-4. This will call initApp after the DOM content has loaded and your app will be started. 
-*/
+}); // completed
