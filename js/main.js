@@ -56,7 +56,7 @@ const createSelectOptions = (data) => {
 // 3
 const toggleCommentSection = (postId) => {
     if (!postId) {
-        return undefined;
+        return;
     }
     const section = document.querySelector(`section[data-post-id='${postId}']`);
     if (!section?.tagName) {
@@ -103,7 +103,7 @@ const toggleCommentButton = (postId) => {
 // 5
 const deleteChildElements = (parentElement) => { 
     if(!parentElement) {
-        return undefined;
+        return;
     } else {
         if (!parentElement?.tagName) {
             return undefined;
