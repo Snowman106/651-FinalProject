@@ -2,6 +2,8 @@
 
 [![Remix on Glitch](https://cdn.glitch.com/2703baf2-b643-4da7-ab91-7ee2a2d00b5b%2Fremix-button.svg)](https://glitch.com/edit/#!/import/github/gitdagray/js_acme_blogs)
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/8edfafbb-ff32-4b22-970e-94052ae66338/deploy-status)](https://app.netlify.com/sites/friendly-hugle-6a0409/deploys)
+
 **Start by clicking the Remix on Glitch button above.**
 
 _Once you are working with your own copy of the project on Glitch..._
@@ -21,4 +23,3 @@ When you are ready to submit your work, follow the instructions that are at the 
 **DO NOT COPY** - Avoid plagiargism and adhere to the spirit of this [Academic Honesty Policy](https://www.freecodecamp.org/news/academic-honesty-policy/).
 # 651-Final
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/8edfafbb-ff32-4b22-970e-94052ae66338/deploy-status)](https://app.netlify.com/sites/friendly-hugle-6a0409/deploys)
